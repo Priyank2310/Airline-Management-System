@@ -2,16 +2,17 @@ package com.airline_management.airlinemanagementsystem.dto;
 
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@ToString
 public class Flight {
-    private int id;
+    private Integer id;
     private String airline;
     private String source;
     private String destination;
     private String departureTime;
     private String arrivalTime;
-    private double price;
+    private Double price;
 }
