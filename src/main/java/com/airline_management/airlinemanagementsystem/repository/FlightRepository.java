@@ -1,13 +1,15 @@
 package com.airline_management.airlinemanagementsystem.repository;
 
 import com.airline_management.airlinemanagementsystem.dto.Flight;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import jakarta.annotation.PostConstruct;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class FlightRepository {
+
     private final List<Flight> flights = new ArrayList<>();
 
     @PostConstruct
@@ -26,5 +28,16 @@ public class FlightRepository {
 
     public Optional<Flight> getFlightById(Integer id) {
         return flights.stream().filter(flight -> flight.getId().equals(id)).findFirst();
+    }
+
+    public List<Flight> findByIdAndDepartureDate(Integer id, String date) {
+        return flights.stream()
+                .filter(flight -> flight.getId().equals(id) && flight.getDepartureTime().startsWith(date))
+                .collect(Collectors.toList());
+    }
+
+    public Flight save(Flight flight) {
+        flights.add(flight);
+        return flight;
     }
 }

@@ -11,12 +11,8 @@ import java.util.Optional;
 @Service
 public class FlightService {
 
-    private final FlightRepository flightRepository;
-
     @Autowired
-    public FlightService(FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
+    private FlightRepository flightRepository;
 
     public List<Flight> getAllFlights(String sortOrder) {
         return flightRepository.getAllFlightsSorted(sortOrder);
@@ -24,5 +20,13 @@ public class FlightService {
 
     public Optional<Flight> getFlightById(Integer id) {
         return flightRepository.getFlightById(id);
+    }
+
+    public List<Flight> getFlightSchedules(Integer id, String date) {
+        return flightRepository.findByIdAndDepartureDate(id, date);
+    }
+
+    public Flight addFlight(Flight flight) {
+        return flightRepository.save(flight);
     }
 }
